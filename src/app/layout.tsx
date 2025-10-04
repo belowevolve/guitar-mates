@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
 import type { ReactNode } from "react";
 import "./app.css";
 
@@ -32,13 +31,9 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
 
-const geist = Geist({
-  subsets: ["latin"],
-});
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" dir="ltr" className={geist.className}>
+    <html dir="ltr" lang="en">
       <body>{children}</body>
     </html>
   );

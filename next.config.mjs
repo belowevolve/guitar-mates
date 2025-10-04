@@ -1,16 +1,21 @@
 // @ts-check
+
+import { execSync } from "node:child_process";
+
 import withSerwistInit from "@serwist/next";
 
-// You may want to use a more robust revision to cache
-// files more efficiently.
-// A viable option is `git rev-parse HEAD`.
-const revision = crypto.randomUUID();
+// Use git commit hash as cache version
+const SHORT_REVISION_LENGTH = 7;
+const revision = execSync("git rev-parse HEAD", { encoding: "utf8" })
+  .trim()
+  .slice(0, SHORT_REVISION_LENGTH);
 
 const withSerwist = withSerwistInit({
   cacheOnNavigation: true,
+  reloadOnOnline: false,
   swSrc: "src/app/sw.ts",
   swDest: "public/sw.js",
-  additionalPrecacheEntries: [{ url: "/~offline", revision }],
+  additionalPrecacheEntries: [{ url: "/", revision }],
 });
 
 /** @type {import("next").NextConfig} */
