@@ -23,20 +23,20 @@ export default function Page() {
         <EmptyMedia variant="icon">
           <WalletCardsIcon />
         </EmptyMedia>
-        <EmptyTitle>No Cards Yet</EmptyTitle>
+        <EmptyTitle>No Chords Yet</EmptyTitle>
         <EmptyDescription>
-          You haven&apos;t created any cards yet. Get started by creating your
-          first card.
+          You haven&apos;t created any chords yet. Get started by creating your
+          first chord.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <div className="flex gap-2">
           <Button asChild>
-            <Link href="/create-card">Create Card</Link>
+            <Link href="/create">Create Chords</Link>
           </Button>
           <Button variant="outline">
             <CameraIcon />
-            Import Card
+            Import Chords
           </Button>
         </div>
       </EmptyContent>
