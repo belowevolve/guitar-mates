@@ -1,7 +1,7 @@
 import { CameraIcon, WalletCardsIcon } from "lucide-react";
 import type { Metadata } from "next";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import {
   Empty,
   EmptyContent,
@@ -9,7 +9,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty";
+} from "@/shared/ui/empty";
 
 export const metadata: Metadata = {
   title: "Home",
