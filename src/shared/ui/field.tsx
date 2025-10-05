@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: shadcn realization */
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";
@@ -213,7 +214,6 @@ function FieldError({
       <ul className="ml-4 flex list-disc flex-col gap-1">
         {errors.map(
           (error, index) =>
-            // biome-ignore lint/suspicious/noArrayIndexKey: shadcn realization
             error?.message && <li key={index}>{error.message}</li>
         )}
       </ul>
