@@ -2,14 +2,18 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./app.css";
 
-const APP_NAME = "NJS App";
-const APP_DESCRIPTION = "Next.js + Serwist PWA";
+import { Toaster } from "@/shared/ui/sonner";
+
+import { ThemeProvider } from "./providers/theme";
+
+const APP_NAME = "Guitar Mates";
+const APP_DESCRIPTION = "Save and share your guitar chords";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: {
     default: APP_NAME,
-    template: "%s - NJS App",
+    template: "%s | Guitar Mates",
   },
   description: APP_DESCRIPTION,
   manifest: "/manifest.json",
@@ -33,9 +37,17 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html dir="ltr" lang="en">
+    <html dir="ltr" lang="en" suppressHydrationWarning>
       <body className="mx-auto min-h-dvh w-full max-w-md px-2 pt-2">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          {children}
+        </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

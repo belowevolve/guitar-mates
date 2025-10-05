@@ -38,6 +38,9 @@ export default function Page() {
             <CameraIcon />
             Import Chords
           </Button>
+          <Button variant="outline">
+            <Link href="/settings">Settings</Link>
+          </Button>
         </div>
       </EmptyContent>
     </Empty>
