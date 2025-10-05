@@ -1,4 +1,4 @@
-import type { ChordData } from "./chord";
+import type { ChordData } from ".";
 
 export const CHORDS: Record<string, ChordData> = {
   A: {

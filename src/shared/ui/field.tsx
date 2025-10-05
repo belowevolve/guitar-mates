@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: shadcn realization */
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";

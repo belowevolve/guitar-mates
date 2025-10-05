@@ -7,8 +7,6 @@ import { toast } from "sonner";
 
 import { Button } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
-import Chord from "@/shared/ui/chord/chord";
-import { CHORDS } from "@/shared/ui/chord/chords";
 import {
   Field,
   FieldGroup,
@@ -17,14 +15,14 @@ import {
   FieldSet,
 } from "@/shared/ui/field";
 import { InputGroup, InputGroupInput } from "@/shared/ui/input-group";
-import { Textarea } from "@/shared/ui/textarea";
+
+import { LyricsField } from "./lyrics-field";
 
 export default function CreatePage() {
   const [songTitle, setSongTitle] = React.useState("");
-  const [lyrics, setLyrics] = React.useState("");
   return (
     <main>
-      <form>
+      <form className="pb-20">
         <FieldGroup>
           <FieldSet>
             <FieldLegend className="flex w-full items-center justify-between">
@@ -66,17 +64,16 @@ export default function CreatePage() {
                   </Button>
                 </ButtonGroup>
               </Field>
+              <Field>
+                <FieldLabel htmlFor="lyrics">Lyrics</FieldLabel>
+                <LyricsField />
+              </Field>
             </FieldGroup>
           </FieldSet>
-          <Textarea
-            onChange={(e) => setLyrics(e.target.value)}
-            value={lyrics}
-          />
           <Field position="bottom">
             <Button type="submit">Submit</Button>
           </Field>
         </FieldGroup>
-        <Chord chord={CHORDS.A} options={{ size: "small" }} />
       </form>
     </main>
   );

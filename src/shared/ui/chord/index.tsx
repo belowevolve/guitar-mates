@@ -1,5 +1,3 @@
-/** biome-ignore-all lint/suspicious/noArrayIndexKey: Static chords data */
-
 import "./styles.css";
 
 import {
@@ -126,10 +124,10 @@ const defaultOptions: ChordOptions = {
   size: "large",
 };
 
-export default function Chord({
+export const Chord = ({
   chord = defaultChord,
   options = defaultOptions,
-}: ChordProps) {
+}: ChordProps) => {
   const { name, points, lines, crosses, min, max } = chord;
 
   // Configuration
@@ -286,4 +284,4 @@ export default function Chord({
       )}
     </svg>
   );
-}
+};
