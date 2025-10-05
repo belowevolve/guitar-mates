@@ -8,5 +8,5 @@ export function searchLyrics(title: string) {
     searchEngine: string;
     artworkUrl: string;
     lyrics: string;
-  }>(`/musicmatch/lyrics?title=${title}`);
+  }>(`/musixmatch/lyrics?title=${title}`);
 }
