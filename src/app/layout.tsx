@@ -34,7 +34,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html dir="ltr" lang="en">
-      <body>{children}</body>
+      <body className="mx-auto min-h-dvh w-full max-w-md px-2 pt-2">
+        {children}
+      </body>
     </html>
   );
 }

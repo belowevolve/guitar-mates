@@ -1,5 +1,6 @@
 import { CameraIcon, WalletCardsIcon } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { Button } from "@/shared/ui/button";
 import {
@@ -30,7 +31,9 @@ export default function Page() {
       </EmptyHeader>
       <EmptyContent>
         <div className="flex gap-2">
-          <Button>Create Card</Button>
+          <Button asChild>
+            <Link href="/create-card">Create Card</Link>
+          </Button>
           <Button variant="outline">
             <CameraIcon />
             Import Card

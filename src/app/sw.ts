@@ -92,6 +92,7 @@ const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   skipWaiting: true,
   clientsClaim: true,
+
   navigationPreload: true,
   runtimeCaching: [...cacheStrategies, ...defaultCache],
 });
