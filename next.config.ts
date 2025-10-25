@@ -21,7 +21,6 @@ const withSerwist = withSerwistInit({
 });
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
   reactCompiler: true,
 };
 
