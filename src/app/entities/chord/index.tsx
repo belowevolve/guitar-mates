@@ -1,11 +1,11 @@
 import "./styles.css";
 
+import type { Point } from "./utils";
 import {
   getCrossCoordinates,
   getMiddleCoordinates,
   getPointCoordinates,
   getTextCoordinates,
-  type Point,
 } from "./utils";
 
 type ChordPoint = Point & {

@@ -2,8 +2,9 @@
 
 import * as React from "react";
 
-import { Chord } from "@/shared/components/chord";
-import { CHORDS, type ChordName } from "@/shared/components/chord/chords";
+import { Chord } from "@/app/entities/chord";
+import type { ChordName } from "@/app/entities/chord/chords";
+import { CHORDS } from "@/app/entities/chord/chords";
 
 type Notation = {
   type: "chord" | "text";

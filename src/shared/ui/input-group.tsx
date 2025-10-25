@@ -3,7 +3,8 @@
 /** biome-ignore-all lint/a11y/noNoninteractiveElementInteractions: shadcn realization */
 "use client";
 
-import { cva, type VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import type * as React from "react";
 
 import { cn } from "@/shared/lib/css";
