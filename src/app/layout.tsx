@@ -4,6 +4,7 @@ import "./app.css";
 
 import { Toaster } from "@/shared/ui/sonner";
 
+import { OfflineIndicator } from "./components/offline-indicator";
 import { ThemeProvider } from "./providers/theme";
 
 const APP_NAME = "Guitar Mates";
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           enableSystem
         >
           {children}
+          <OfflineIndicator />
         </ThemeProvider>
         <Toaster />
       </body>

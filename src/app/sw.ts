@@ -4,7 +4,13 @@ import type {
   RuntimeCaching,
   SerwistGlobalConfig,
 } from "serwist";
-import { ExpirationPlugin, Serwist, StaleWhileRevalidate } from "serwist";
+import {
+  CacheFirst,
+  ExpirationPlugin,
+  NetworkFirst,
+  Serwist,
+  StaleWhileRevalidate,
+} from "serwist";
 
 declare global {
   interface WorkerGlobalScope extends SerwistGlobalConfig {
@@ -17,8 +23,15 @@ declare global {
 
 declare const self: ServiceWorkerGlobalScope;
 
-// Custom caching strategies
+const DAY_IN_SECONDS = 24 * 60 * 60;
+// biome-ignore lint/style/noMagicNumbers: <explanation>
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+// biome-ignore lint/style/noMagicNumbers: <explanation>
+const MONTH_IN_SECONDS = 30 * DAY_IN_SECONDS;
+
+// Custom caching strategies for offline support
 const cacheStrategies: RuntimeCaching[] = [
+  // Cache RSC prefetch requests
   {
     matcher: ({ request, url: { pathname }, sameOrigin }) =>
       request.headers.get("RSC") === "1" &&
@@ -30,12 +43,13 @@ const cacheStrategies: RuntimeCaching[] = [
       plugins: [
         new ExpirationPlugin({
           maxEntries: 200,
-          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+          maxAgeSeconds: DAY_IN_SECONDS, // 24 hours
           maxAgeFrom: "last-used",
         }),
       ],
     }),
   },
+  // Cache RSC requests
   {
     matcher: ({ request, url: { pathname }, sameOrigin }) =>
       request.headers.get("RSC") === "1" &&
@@ -46,12 +60,32 @@ const cacheStrategies: RuntimeCaching[] = [
       plugins: [
         new ExpirationPlugin({
           maxEntries: 200,
-          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+          maxAgeSeconds: DAY_IN_SECONDS, // 24 hours
           maxAgeFrom: "last-used",
         }),
       ],
     }),
   },
+  // Cache HTML pages with network-first strategy for songs
+  {
+    matcher: ({ url: { pathname }, sameOrigin }) =>
+      sameOrigin &&
+      (pathname === "/" ||
+        pathname.startsWith("/song/") ||
+        pathname === "/create" ||
+        pathname === "/settings"),
+    handler: new NetworkFirst({
+      cacheName: "app-pages",
+      plugins: [
+        new ExpirationPlugin({
+          maxEntries: 100,
+          maxAgeSeconds: WEEK_IN_SECONDS, // 7 days
+          maxAgeFrom: "last-used",
+        }),
+      ],
+    }),
+  },
+  // Cache other HTML pages
   {
     matcher: ({ request, url: { pathname }, sameOrigin }) =>
       request.headers.get("Content-Type")?.includes("text/html") &&
@@ -62,35 +96,46 @@ const cacheStrategies: RuntimeCaching[] = [
       plugins: [
         new ExpirationPlugin({
           maxEntries: 200,
-          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+          maxAgeSeconds: DAY_IN_SECONDS, // 24 hours
           maxAgeFrom: "last-used",
         }),
       ],
     }),
   },
-
-  // Other resource caching strategies
-  // {
-  //   matcher: /\.(?:mp4|webm)$/i,
-  //   handler: new StaleWhileRevalidate({
-  //     cacheName: 'static-video-assets',
-  //     plugins: [
-  //       new ExpirationPlugin({
-  //         maxEntries: 32,
-  //         maxAgeSeconds: 7 * 24 * 60 * 60,
-  //         maxAgeFrom: 'last-used',
-  //       }),
-  //      new RangeRequestsPlugin(),
-  //     ],
-  //   }),
-  // },
+  // Cache static assets (CSS, JS, fonts) with cache-first strategy
+  {
+    matcher: /\.(?:js|css|woff2?|ttf|otf|eot)$/i,
+    handler: new CacheFirst({
+      cacheName: "static-assets",
+      plugins: [
+        new ExpirationPlugin({
+          maxEntries: 100,
+          maxAgeSeconds: MONTH_IN_SECONDS, // 30 days
+          maxAgeFrom: "last-used",
+        }),
+      ],
+    }),
+  },
+  // Cache images with cache-first strategy
+  {
+    matcher: /\.(?:png|jpg|jpeg|gif|webp|svg|ico)$/i,
+    handler: new CacheFirst({
+      cacheName: "static-images",
+      plugins: [
+        new ExpirationPlugin({
+          maxEntries: 60,
+          maxAgeSeconds: MONTH_IN_SECONDS, // 30 days
+          maxAgeFrom: "last-used",
+        }),
+      ],
+    }),
+  },
 ];
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   skipWaiting: true,
   clientsClaim: true,
-
   navigationPreload: true,
   runtimeCaching: [...cacheStrategies, ...defaultCache],
 });

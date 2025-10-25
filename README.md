@@ -1,40 +1,101 @@
-# Serwist example - next-basic
+# Guitar Mates 🎸
 
-This example demonstrates how to use Serwist with Next.js.
+A Progressive Web App (PWA) for saving and sharing your guitar chords with lyrics. Works completely offline!
 
-## Usage
+## Features
 
-[![Open in Gitpod and run](https://img.shields.io/badge/Open%20In-Gitpod.io-%231966D2?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/serwist/serwist/)
+- 🎵 **Create Songs** - Add your songs with lyrics and chord notations
+- 🎸 **Chord Diagrams** - Automatic chord diagram display for guitar chords
+- 💾 **Local Storage** - All your songs are saved locally in your browser
+- 📱 **Progressive Web App** - Install on your device and use like a native app
+- 🌐 **Offline Support** - Full offline functionality powered by Serwist
+- 🎨 **Dark/Light Theme** - Automatic theme switching
+- 📋 **Responsive Design** - Works on mobile, tablet, and desktop
+
+## Offline Capabilities
+
+This app is a **full-featured PWA** that works completely offline:
+
+- ✅ **View all songs** - Access your entire song library offline
+- ✅ **Create new songs** - Add songs even without internet connection
+- ✅ **Edit songs** - Make changes to existing songs offline
+- ✅ **Delete songs** - Remove songs from your library offline
+- ✅ **View chord diagrams** - All chord visualizations work offline
+- ✅ **Automatic sync** - Changes are stored locally and persist across sessions
+
+### How it Works
+
+1. **localStorage** - Songs are stored in your browser's localStorage
+2. **Service Worker** - Serwist caches all app pages and assets
+3. **Network-First Strategy** - Tries to fetch updates when online, falls back to cache when offline
+4. **Precaching** - Essential pages (/, /create, /settings) are precached on install
+
+### Caching Strategy
+
+- **App Pages** (`/`, `/create`, `/settings`, `/song/:id`) - Network-first with 7-day cache fallback
+- **Static Assets** (JS, CSS, fonts) - Cache-first with 30-day expiration
+- **Images** - Cache-first with 30-day expiration
+- **RSC Requests** - Stale-while-revalidate with 24-hour cache
+
+## Getting Started
+
+### Development
 
 ```bash
-cd examples/next-basic
+# Install dependencies
+pnpm install
+
+# Run development server
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### Build
+
+```bash
+# Build for production
 pnpm build
+
+# Start production server
 pnpm start
 ```
 
-or
+### Install as PWA
 
-Execute [`degit`](https://github.com/Rich-Harris/degit) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), [pnpm](https://pnpm.io), or [bun](https://bun.sh) to bootstrap the example:
+1. Open the app in your browser
+2. Look for the "Install" or "Add to Home Screen" option
+3. Follow the prompts to install
+4. Launch from your home screen or app drawer
 
-```bash
-npx degit serwist/serwist/examples/next-basic my-app
+## Chord Notation
+
+Use square brackets to add chord notations:
+
+```
+[Verse 1]
+[Am]This is where the [C]lyrics go
+With [G]chords above the [F]words
+
+[Chorus]
+[C]Sing along with [G]me
+[Am]Together we'll [F]be free
 ```
 
-```bash
-yarn degit serwist/serwist/examples/next-basic my-app
-```
+- **Chord notations** like `[Am]`, `[C]`, `[G]` will display chord diagrams
+- **Section labels** like `[Verse 1]`, `[Chorus]` will appear as bold text
 
-```bash
-pnpx degit serwist/serwist/examples/next-basic my-app
-```
+## Tech Stack
 
-```bash
-bunx degit serwist/serwist/examples/next-basic my-app
-```
+- **Next.js 16** - React framework
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Serwist** - Service worker and PWA functionality
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Icons
+- **Sonner** - Toast notifications
 
-## Recommended `.gitignore`
+## License
 
-```gitignore
-public/sw*
-public/swe-worker*
-```
+MIT

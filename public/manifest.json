@@ -1,6 +1,7 @@
 {
-  "name": "My Awesome PWA app",
-  "short_name": "PWA App",
+  "name": "Guitar Mates - Save and Share Chords",
+  "short_name": "Guitar Mates",
+  "description": "Save and share your guitar chords with lyrics. Works offline!",
   "icons": [
     {
       "src": "/icons/android-chrome-192x192.png",
@@ -18,5 +19,8 @@
   "background_color": "#FFFFFF",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["music", "productivity", "entertainment"],
+  "screenshots": []
 }
