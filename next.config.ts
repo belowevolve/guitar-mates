@@ -3,6 +3,7 @@
 import { execSync } from "node:child_process";
 
 import withSerwistInit from "@serwist/next";
+import type { NextConfig } from "next";
 
 // Use git commit hash as cache version
 const SHORT_REVISION_LENGTH = 7;
@@ -19,9 +20,9 @@ const withSerwist = withSerwistInit({
   additionalPrecacheEntries: [{ url: "/", revision }],
 });
 
-/** @type {import("next").NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
+  reactCompiler: true,
 };
 
 export default withSerwist(nextConfig);

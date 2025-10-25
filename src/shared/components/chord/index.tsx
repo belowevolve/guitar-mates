@@ -72,6 +72,7 @@ const chordConfig = {
     crossOffset: 2,
 
     textYAxisOffset: 3.5,
+    leftOffset: 7,
   },
   large: {
     container: {
@@ -100,6 +101,7 @@ const chordConfig = {
     crossOffset: 4,
 
     textYAxisOffset: 3.5,
+    leftOffset: 14,
   },
 };
 
@@ -108,16 +110,6 @@ const defaultChord: ChordData = {
   name: "",
   points: [],
   lines: [],
-  min: {
-    text: "",
-    x: -1,
-    y: -1,
-  },
-  max: {
-    text: "",
-    x: -1,
-    y: -1,
-  },
 };
 
 const defaultOptions: ChordOptions = {
@@ -139,8 +131,9 @@ export const Chord = ({
 
   return (
     <svg
-      className="ge-chord"
+      className="ge-chord relative"
       height={config.container.height}
+      style={{ left: `-${config.leftOffset}px` }}
       width={config.container.width}
       xmlns="http://www.w3.org/2000/svg"
     >

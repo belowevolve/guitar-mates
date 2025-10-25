@@ -2,8 +2,8 @@
 
 import * as React from "react";
 
-import { Chord } from "@/shared/ui/chord";
-import { CHORDS, type ChordName } from "@/shared/ui/chord/chords";
+import { Chord } from "@/shared/components/chord";
+import { CHORDS, type ChordName } from "@/shared/components/chord/chords";
 
 type Notation = {
   type: "chord" | "text";
@@ -49,9 +49,8 @@ export const LyricsPreview = ({ lyrics }: LyricsPreviewProps) => {
   const lines = lyrics.split("\n");
 
   return (
-    <div className="space-y-6 rounded-lg border p-6">
-      <h3 className="font-semibold text-gray-900 text-lg">Preview</h3>
-      <div className="space-y-4 font-mono text-sm">
+    <div className="rounded-lg border px-3 py-2">
+      <div className="space-y-0.5 font-mono text-sm">
         {lines.map((line, idx) => {
           const { cleanText, notations } = parseLine(line);
 
