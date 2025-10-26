@@ -1,11 +1,11 @@
 "use client";
 
+import { useLiveQuery } from "dexie-react-hooks";
 import { CameraIcon, PlusIcon, WalletCardsIcon } from "lucide-react";
 import Link from "next/link";
-import { toast } from "sonner";
 
 import { SongCard } from "@/app/components/song-card";
-import { useSongs } from "@/shared/hooks/use-songs";
+import { db, deleteSong } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
 import {
   Empty,
@@ -17,12 +17,11 @@ import {
 } from "@/shared/ui/empty";
 
 export default function Page() {
-  const { songs, deleteSong } = useSongs();
+  const songs = useLiveQuery(() => db.songs.toArray());
 
-  const handleDeleteSong = (id: string) => {
-    deleteSong(id);
-    toast.success("Song deleted successfully!");
-  };
+  if (!songs) {
+    return <div>Loading...</div>;
+  }
 
   if (songs.length === 0) {
     return (
@@ -76,7 +75,7 @@ export default function Page() {
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {songs.map((song) => (
-          <SongCard key={song.id} onDelete={handleDeleteSong} song={song} />
+          <SongCard key={song.id} onDelete={deleteSong} song={song} />
         ))}
       </div>
     </main>

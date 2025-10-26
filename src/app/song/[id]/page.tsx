@@ -1,12 +1,13 @@
 "use client";
 
+import { useLiveQuery } from "dexie-react-hooks";
 import { ArrowLeftIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { LyricsPreview } from "@/app/create/lyrics-preview";
-import { useSongs } from "@/shared/hooks/use-songs";
+import { db, deleteSong } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
 import {
   Empty,
@@ -19,9 +20,8 @@ import {
 export default function SongPage() {
   const params = useParams();
   const router = useRouter();
-  const { getSong, deleteSong } = useSongs();
 
-  const song = getSong(params.id as string);
+  const song = useLiveQuery(() => db.songs.get({ id: Number(params.id) }));
 
   if (!song) {
     return (

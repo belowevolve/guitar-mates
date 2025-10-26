@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { toast } from "sonner";
 
-import { useSongs } from "@/shared/hooks/use-songs";
+import { addSong } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import {
@@ -22,11 +22,10 @@ import { LyricsField } from "./lyrics-field";
 
 export default function CreatePage() {
   const router = useRouter();
-  const { addSong } = useSongs();
   const [songTitle, setSongTitle] = React.useState("");
   const [lyrics, setLyrics] = React.useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!songTitle.trim()) {
@@ -39,7 +38,7 @@ export default function CreatePage() {
       return;
     }
 
-    addSong({ title: songTitle, lyrics });
+    await addSong({ title: songTitle, lyrics });
     toast.success("Song saved successfully!");
     router.push("/");
   };
