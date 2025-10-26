@@ -28,7 +28,7 @@ export const OfflineIndicator = () => {
 
   return (
     <div className="-translate-x-1/2 fixed bottom-4 left-1/2 z-50 flex items-center gap-2 rounded-full bg-yellow-500 px-4 py-2 font-medium text-sm text-white shadow-lg">
-      <WifiOffIcon className="h-4 w-4" />
+      <WifiOffIcon />
       <span>You&apos;re offline - Changes saved locally</span>
     </div>
   );

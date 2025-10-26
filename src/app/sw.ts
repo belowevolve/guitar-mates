@@ -24,9 +24,9 @@ declare global {
 declare const self: ServiceWorkerGlobalScope;
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
-// biome-ignore lint/style/noMagicNumbers: <explanation>
+// biome-ignore lint/style/noMagicNumbers: ignore
 const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
-// biome-ignore lint/style/noMagicNumbers: <explanation>
+// biome-ignore lint/style/noMagicNumbers: ignore
 const MONTH_IN_SECONDS = 30 * DAY_IN_SECONDS;
 
 // Custom caching strategies for offline support

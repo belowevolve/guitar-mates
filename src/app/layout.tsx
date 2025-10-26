@@ -7,24 +7,23 @@ import { Toaster } from "@/shared/ui/sonner";
 import { OfflineIndicator } from "./components/offline-indicator";
 import { ThemeProvider } from "./providers/theme";
 
-const APP_NAME = "Guitar Mates";
-const APP_DESCRIPTION = "Save and share your guitar chords";
+const APP = {
+  NAME: "Guitar mates",
+  DESCRIPTION: "Save and share your guitar chords",
+} as const;
 
 export const metadata: Metadata = {
-  applicationName: APP_NAME,
+  applicationName: APP.NAME,
   title: {
-    default: APP_NAME,
-    template: "%s | Guitar Mates",
+    default: APP.NAME,
+    template: `%s | ${APP.NAME}`,
   },
-  description: APP_DESCRIPTION,
+  description: APP.DESCRIPTION,
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: APP_NAME,
-  },
-  formatDetection: {
-    telephone: false,
+    title: APP.NAME,
   },
   icons: {
     shortcut: "/favicon.ico",
