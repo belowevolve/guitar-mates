@@ -23,7 +23,12 @@ db.version(1).stores({
 
 export function addSong(song: Omit<Song, "id">) {
   const now = new Date();
-  return db.songs.add({ ...song, createdAt: now, updatedAt: now });
+  return db.songs.add({
+    ...song,
+    id: crypto.randomUUID(),
+    createdAt: now,
+    updatedAt: now,
+  });
 }
 
 export function updateSong(song: Song) {

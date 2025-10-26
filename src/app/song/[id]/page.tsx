@@ -21,7 +21,7 @@ export default function SongPage() {
   const params = useParams();
   const router = useRouter();
 
-  const song = useLiveQuery(() => db.songs.get({ id: Number(params.id) }));
+  const song = useLiveQuery(() => db.songs.get(params.id as string));
 
   if (!song) {
     return (
