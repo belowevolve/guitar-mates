@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: APP.NAME,
   },
   icons: {
-    shortcut: "/favicon.ico",
+    shortcut: "/icons/favicon.ico",
     apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
 };
