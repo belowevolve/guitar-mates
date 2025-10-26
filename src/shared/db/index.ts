@@ -7,7 +7,7 @@ export type Song = {
   lyrics: string;
 };
 
-type DbItem = { createdAt: string; updatedAt: string };
+type DbItem = { createdAt: Date; updatedAt: Date };
 
 const db = new Dexie("app-db") as Dexie & {
   songs: EntityTable<
@@ -22,12 +22,12 @@ db.version(1).stores({
 });
 
 export function addSong(song: Omit<Song, "id">) {
-  const now = new Date().toISOString();
+  const now = new Date();
   return db.songs.add({ ...song, createdAt: now, updatedAt: now });
 }
 
 export function updateSong(song: Song) {
-  const now = new Date().toISOString();
+  const now = new Date();
   return db.songs.update(song.id, { ...song, updatedAt: now });
 }
 
