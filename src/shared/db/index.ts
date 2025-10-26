@@ -1,17 +1,25 @@
 import type { EntityTable } from "dexie";
 import Dexie from "dexie";
 
-export type Song = {
-  id: string;
+type Id = string;
+
+export type SongInput = {
   title: string;
   lyrics: string;
 };
 
-type DbItem = { createdAt: Date; updatedAt: Date };
+type SongUpdate = SongInput & {
+  id: Id;
+};
+
+export type Song = SongUpdate & {
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 const db = new Dexie("app-db") as Dexie & {
   songs: EntityTable<
-    Song & DbItem,
+    Song,
     "id" // primary key "id" (for the typings only)
   >;
 };
@@ -21,7 +29,7 @@ db.version(1).stores({
   songs: "++id, title, lyrics, createdAt, updatedAt", // primary key "id" (for the runtime!)
 });
 
-export function addSong(song: Omit<Song, "id">) {
+export function addSong(song: SongInput) {
   const now = new Date();
   return db.songs.add({
     ...song,
@@ -31,12 +39,12 @@ export function addSong(song: Omit<Song, "id">) {
   });
 }
 
-export function updateSong(song: Song) {
+export function updateSong(song: SongUpdate) {
   const now = new Date();
   return db.songs.update(song.id, { ...song, updatedAt: now });
 }
 
-export function deleteSong(id: string) {
+export function deleteSong(id: Id) {
   return db.songs.delete(id);
 }
 

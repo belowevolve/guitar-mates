@@ -4,7 +4,7 @@ import { CalendarIcon, MusicIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 import type * as React from "react";
 
-import type { Song } from "@/shared/types/song";
+import type { Song } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
 
@@ -18,13 +18,6 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
     e.preventDefault();
     onDelete(song.id);
   };
-
-  const formatDate = (date: string) =>
-    new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
 
   // Extract first few lines of lyrics for preview
   const getLyricsPreview = (lyrics: string, maxLines = 3) => {
@@ -44,7 +37,11 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
               <h3 className="font-semibold leading-tight">{song.title}</h3>
               <div className="mt-1 flex items-center gap-1 text-muted-foreground text-xs">
                 <CalendarIcon className="h-3 w-3" />
-                {formatDate(song.createdAt)}
+                {song.createdAt.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </div>
             </div>
           </div>
