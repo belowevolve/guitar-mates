@@ -1,4 +1,3 @@
-/* biome-ignore-all lint/suspicious/noUnknownAtRules: This file uses Tailwind CSS and custom at-rules that may not be recognized by standard CSS linters. */
 @import "tailwindcss";
 @import "tw-animate-css";
 

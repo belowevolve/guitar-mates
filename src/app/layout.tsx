@@ -45,8 +45,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           disableTransitionOnChange
           enableSystem
         >
-          {children}
           <OfflineIndicator />
+          {children}
         </ThemeProvider>
         <Toaster />
       </body>
