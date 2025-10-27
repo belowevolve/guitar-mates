@@ -22,6 +22,7 @@ const withSerwist = withSerwistInit({
     { url: "/offline-song", revision },
     { url: "/create", revision },
     { url: "/settings", revision },
+    { url: "/manifest.json", revision },
   ],
 });
 
