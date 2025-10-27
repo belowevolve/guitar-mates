@@ -73,7 +73,7 @@ export default function Page() {
           </Link>
         </Button>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col gap-4">
         {songs.map((song) => (
           <SongCard key={song.id} onDelete={deleteSong} song={song} />
         ))}

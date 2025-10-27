@@ -4,8 +4,7 @@ import "./app.css";
 
 import { Toaster } from "@/shared/ui/sonner";
 
-import { OfflineIndicator } from "./components/offline-indicator";
-import { ThemeProvider } from "./providers/theme";
+import { ClientProvider } from "./providers/client";
 
 const APP = {
   NAME: "Guitar mates",
@@ -39,15 +38,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html dir="ltr" lang="en" suppressHydrationWarning>
       <body className="mx-auto min-h-dvh w-full max-w-md px-2 pt-2">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          disableTransitionOnChange
-          enableSystem
-        >
-          <OfflineIndicator />
-          {children}
-        </ThemeProvider>
+        <ClientProvider>{children}</ClientProvider>
         <Toaster />
       </body>
     </html>

@@ -71,7 +71,7 @@ const cacheStrategies: RuntimeCaching[] = [
     matcher: ({ url: { pathname }, sameOrigin }) =>
       sameOrigin &&
       (pathname === "/" ||
-        pathname.startsWith("/song/") ||
+        pathname.startsWith("/offline") ||
         pathname === "/create" ||
         pathname === "/settings"),
     handler: new NetworkFirst({
@@ -138,6 +138,17 @@ const serwist = new Serwist({
   clientsClaim: true,
   navigationPreload: true,
   runtimeCaching: [...cacheStrategies, ...defaultCache],
+  fallbacks: {
+    entries: [
+      {
+        url: "/song-offline",
+        matcher({ request }) {
+          const url = new URL(request.url);
+          return url.pathname.startsWith("/song/");
+        },
+      },
+    ],
+  },
 });
 
 serwist.addEventListeners();

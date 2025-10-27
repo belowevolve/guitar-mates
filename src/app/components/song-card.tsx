@@ -19,16 +19,10 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
     onDelete(song.id);
   };
 
-  // Extract first few lines of lyrics for preview
-  const getLyricsPreview = (lyrics: string, maxLines = 3) => {
-    const lines = lyrics.split("\n").filter((line) => line.trim());
-    return lines.slice(0, maxLines).join("\n");
-  };
-
   return (
     <Link href={`/song/${song.id}`}>
       <Card className="group relative h-full cursor-pointer p-4 transition-all hover:shadow-md">
-        <div className="mb-3 flex items-start justify-between">
+        <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
               <MusicIcon className="h-5 w-5 text-primary" />
@@ -47,7 +41,6 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
           </div>
           <Button
             aria-label="Delete song"
-            className="opacity-0 transition-opacity group-hover:opacity-100"
             onClick={handleDelete}
             size="icon-sm"
             type="button"
@@ -58,7 +51,7 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
         </div>
         <div className="rounded-md bg-muted/50 px-3 py-2">
           <pre className="line-clamp-3 whitespace-pre-wrap font-mono text-muted-foreground text-xs">
-            {getLyricsPreview(song.lyrics)}
+            {song.lyrics}
           </pre>
         </div>
       </Card>
