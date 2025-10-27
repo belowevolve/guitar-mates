@@ -24,7 +24,7 @@ export default function SongPage() {
   const handleDelete = () => {
     deleteSong(song.id);
     toast.success("Song deleted successfully!");
-    router.push("/");
+    router.back();
   };
 
   return (
