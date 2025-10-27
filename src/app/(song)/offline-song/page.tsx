@@ -3,7 +3,8 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { ArrowLeftIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { LyricsPreview } from "@/app/create/lyrics-preview";
@@ -18,10 +19,16 @@ import {
 } from "@/shared/ui/empty";
 
 export default function SongPage() {
-  const params = useParams();
+  const [id, setId] = useState<string | undefined>(undefined);
   const router = useRouter();
 
-  const song = useLiveQuery(() => db.songs.get(params.id as string));
+  useEffect(() => {
+    const parts = location.pathname.split("/").filter(Boolean);
+    console.log(parts);
+    setId(parts.at(-1) || "—");
+  }, []);
+
+  const song = useLiveQuery(() => (id ? db.songs.get(id) : undefined));
 
   if (!song) {
     return (

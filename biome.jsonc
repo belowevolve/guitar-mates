@@ -23,7 +23,8 @@
         "useArrowFunction": "error"
       },
       "suspicious": {
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noConsole": "warn"
       },
       "nursery": {
         "useSortedClasses": {
