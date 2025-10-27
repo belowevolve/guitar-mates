@@ -20,7 +20,7 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
   };
 
   return (
-    <Link href={`/song/${song.id}`}>
+    <Link href={`/song/${song.id}`} prefetch={false}>
       <Card className="group relative h-full cursor-pointer p-4 transition-all hover:shadow-md">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">
