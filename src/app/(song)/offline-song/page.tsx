@@ -10,13 +10,6 @@ import { toast } from "sonner";
 import { LyricsPreview } from "@/app/create/lyrics-preview";
 import { db, deleteSong } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from "@/shared/ui/empty";
 
 function SongPage() {
   const id = location.pathname.split("/").filter(Boolean).at(-1);
@@ -25,24 +18,7 @@ function SongPage() {
   const song = useLiveQuery(() => (id ? db.songs.get(id) : undefined));
 
   if (!song) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyTitle>Song Not Found {id}</EmptyTitle>
-          <EmptyDescription>
-            The song you&apos;re looking for doesn&apos;t exist.
-          </EmptyDescription>
-        </EmptyHeader>
-        <EmptyContent>
-          <Button asChild>
-            <Link href="/">
-              <ArrowLeftIcon />
-              Back to Home
-            </Link>
-          </Button>
-        </EmptyContent>
-      </Empty>
-    );
+    return null;
   }
 
   const handleDelete = () => {

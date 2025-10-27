@@ -10,13 +10,6 @@ import { OfflineReadyButton } from "@/app/components/offline-indicator";
 import { LyricsPreview } from "@/app/create/lyrics-preview";
 import { db, deleteSong } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from "@/shared/ui/empty";
 
 export default function SongPage() {
   const params = useParams();
@@ -25,24 +18,7 @@ export default function SongPage() {
   const song = useLiveQuery(() => db.songs.get(params.id as string));
 
   if (!song) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyTitle>Song Not Found</EmptyTitle>
-          <EmptyDescription>
-            The song you&apos;re looking for doesn&apos;t exist.
-          </EmptyDescription>
-        </EmptyHeader>
-        <EmptyContent>
-          <Button asChild>
-            <Link href="/">
-              <ArrowLeftIcon />
-              Back to Home
-            </Link>
-          </Button>
-        </EmptyContent>
-      </Empty>
-    );
+    return null;
   }
 
   const handleDelete = () => {
