@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import { OfflineReadyButton } from "@/app/components/offline-indicator";
 import { LyricsPreview } from "@/app/create/lyrics-preview";
 import { db, deleteSong } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
@@ -71,10 +72,13 @@ export default function SongPage() {
             </p>
           </div>
         </div>
-        <Button onClick={handleDelete} type="button" variant="destructive">
-          <TrashIcon />
-          Delete Song
-        </Button>
+        <div className="flex items-center gap-2">
+          <OfflineReadyButton songId={song.id} />
+          <Button onClick={handleDelete} type="button" variant="destructive">
+            <TrashIcon />
+            Delete Song
+          </Button>
+        </div>
       </div>
       <div className="mx-auto max-w-4xl">
         <LyricsPreview lyrics={song.lyrics} />
