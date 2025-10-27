@@ -3,6 +3,7 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { CameraIcon, PlusIcon, WalletCardsIcon } from "lucide-react";
 import Link from "next/link";
+import { ViewTransition } from "react";
 
 import { SongCard } from "@/app/components/song-card";
 import { db, deleteSong } from "@/shared/db";
@@ -58,26 +59,28 @@ export default function Page() {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="font-bold text-3xl">My Songs</h1>
-          <p className="mt-1 text-muted-foreground">
-            {songs.length} {songs.length === 1 ? "song" : "songs"} saved
-          </p>
+    <ViewTransition>
+      <main className="container mx-auto px-4 py-8">
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="font-bold text-3xl">My Songs</h1>
+            <p className="mt-1 text-muted-foreground">
+              {songs.length} {songs.length === 1 ? "song" : "songs"} saved
+            </p>
+          </div>
+          <Button asChild>
+            <Link href="/create">
+              <PlusIcon />
+              Create Song
+            </Link>
+          </Button>
         </div>
-        <Button asChild>
-          <Link href="/create">
-            <PlusIcon />
-            Create Song
-          </Link>
-        </Button>
-      </div>
-      <div className="flex flex-col gap-4">
-        {songs.map((song) => (
-          <SongCard key={song.id} onDelete={deleteSong} song={song} />
-        ))}
-      </div>
-    </main>
+        <div className="flex flex-col gap-4">
+          {songs.map((song) => (
+            <SongCard key={song.id} onDelete={deleteSong} song={song} />
+          ))}
+        </div>
+      </main>
+    </ViewTransition>
   );
 }

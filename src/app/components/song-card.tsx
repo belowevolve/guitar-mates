@@ -3,6 +3,7 @@
 import { CalendarIcon, MusicIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 import type * as React from "react";
+import { ViewTransition } from "react";
 
 import type { Song } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
@@ -30,7 +31,9 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
               <MusicIcon className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <h3 className="font-semibold leading-tight">{song.title}</h3>
+              <ViewTransition name={`title-${song.id}`}>
+                <h3 className="font-semibold leading-tight">{song.title}</h3>
+              </ViewTransition>
               <div className="mt-1 flex items-center gap-1 text-muted-foreground text-xs">
                 <CalendarIcon className="h-3 w-3" />
                 {song.createdAt.toLocaleDateString("en-US", {
