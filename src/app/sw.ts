@@ -144,7 +144,10 @@ const serwist = new Serwist({
         url: "/offline-song",
         matcher({ request }) {
           const url = new URL(request.url);
-          return url.pathname.startsWith("/song");
+          return (
+            request.destination === "document" &&
+            url.pathname.startsWith("/song")
+          );
         },
       },
     ],
