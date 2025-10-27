@@ -19,6 +19,7 @@ const withSerwist = withSerwistInit({
   disable: process.env.NODE_ENV === "development",
   additionalPrecacheEntries: [
     { url: "/", revision },
+    { url: "/offline-song", revision },
     { url: "/create", revision },
     { url: "/settings", revision },
     { url: "/manifest.json", revision },
