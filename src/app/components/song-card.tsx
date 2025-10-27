@@ -49,7 +49,7 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
             type="button"
             variant="ghost"
           >
-            <LinkIcon className="h-4 w-4 text-primary" />
+            <LinkIcon />
           </Button>
           <Button
             aria-label="Delete song"
@@ -58,7 +58,7 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
             type="button"
             variant="ghost"
           >
-            <TrashIcon className="h-4 w-4 text-destructive" />
+            <TrashIcon className="text-destructive" />
           </Button>
         </div>
         <div className="rounded-md bg-muted/50 px-3 py-2">
