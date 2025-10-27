@@ -34,7 +34,7 @@ export default function SongPage() {
     return (
       <Empty>
         <EmptyHeader>
-          <EmptyTitle>Song Not Found</EmptyTitle>
+          <EmptyTitle>Song Not Found {id}</EmptyTitle>
           <EmptyDescription>
             The song you&apos;re looking for doesn&apos;t exist.
           </EmptyDescription>
