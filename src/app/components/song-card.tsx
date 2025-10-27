@@ -1,7 +1,8 @@
 "use client";
 
-import { CalendarIcon, MusicIcon, TrashIcon } from "lucide-react";
+import { CalendarIcon, LinkIcon, MusicIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type * as React from "react";
 
 import type { Song } from "@/shared/db";
@@ -14,6 +15,8 @@ type SongCardProps = {
 };
 
 export const SongCard = ({ song, onDelete }: SongCardProps) => {
+  const router = useRouter();
+
   const handleDelete = (e: React.MouseEvent) => {
     e.preventDefault();
     onDelete(song.id);
@@ -39,6 +42,15 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
               </div>
             </div>
           </div>
+          <Button
+            aria-label="Delete song"
+            onClick={() => router.push(`/song/${song.id}`)}
+            size="icon-sm"
+            type="button"
+            variant="ghost"
+          >
+            <LinkIcon className="h-4 w-4 text-primary" />
+          </Button>
           <Button
             aria-label="Delete song"
             onClick={handleDelete}
