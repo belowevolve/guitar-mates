@@ -2,6 +2,7 @@
 
 import { useLiveQuery } from "dexie-react-hooks";
 import { ArrowLeftIcon, TrashIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -17,7 +18,7 @@ import {
   EmptyTitle,
 } from "@/shared/ui/empty";
 
-export default function SongPage() {
+function SongPage() {
   const id = location.pathname.split("/").filter(Boolean).at(-1);
   const router = useRouter();
 
@@ -82,3 +83,7 @@ export default function SongPage() {
     </main>
   );
 }
+
+export default dynamic(() => Promise.resolve(SongPage), {
+  ssr: false,
+});
