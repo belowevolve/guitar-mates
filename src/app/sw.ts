@@ -141,7 +141,7 @@ const serwist = new Serwist({
   fallbacks: {
     entries: [
       {
-        url: "/song-offline",
+        url: "/offline-song",
         matcher({ request }) {
           const url = new URL(request.url);
           return url.pathname.startsWith("/song");
