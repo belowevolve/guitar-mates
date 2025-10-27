@@ -28,7 +28,7 @@ export default function SongPage() {
     setId(parts.at(-1) || "—");
   }, []);
 
-  const song = useLiveQuery(() => (id ? db.songs.get(id) : undefined));
+  const song = useLiveQuery(() => (id ? db.songs.get(id) : undefined), [id]);
 
   if (!song) {
     return (
