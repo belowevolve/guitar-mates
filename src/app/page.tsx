@@ -60,8 +60,8 @@ export default function Page() {
 
   return (
     <ViewTransition>
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-6 flex items-center justify-between">
+      <main className="container mx-auto min-h-dvh px-4 py-8">
+        <div className="mb-6 flex justify-between">
           <div>
             <h1 className="font-bold text-3xl">My Songs</h1>
             <p className="mt-1 text-muted-foreground">

@@ -23,7 +23,7 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
   };
 
   return (
-    <Link href={`/song/${song.id}`} prefetch={false}>
+    <Link href={`/song#${song.id}`}>
       <Card className="group relative h-full cursor-pointer p-4 transition-all hover:shadow-md">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">
@@ -32,16 +32,18 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
             </div>
             <div>
               <ViewTransition name={`title-${song.id}`}>
-                <h3 className="font-semibold leading-tight">{song.title}</h3>
+                <h2 className="font-semibold leading-tight">{song.title}</h2>
               </ViewTransition>
-              <div className="mt-1 flex items-center gap-1 text-muted-foreground text-xs">
-                <CalendarIcon className="h-3 w-3" />
-                {song.createdAt.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </div>
+              <ViewTransition name={`createdAt-${song.id}`}>
+                <div className="mt-1 flex items-center gap-1 text-muted-foreground text-xs">
+                  <CalendarIcon className="h-3 w-3" />
+                  {song.createdAt.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
+              </ViewTransition>
             </div>
           </div>
           <OfflineReadyButton songId={song.id} />
