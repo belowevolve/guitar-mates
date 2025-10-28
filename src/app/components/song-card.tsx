@@ -9,8 +9,6 @@ import type { Song } from "@/shared/db";
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
 
-import { OfflineReadyButton } from "./offline-indicator";
-
 type SongCardProps = {
   song: Song;
   onDelete: (id: string) => void;
@@ -23,7 +21,7 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
   };
 
   return (
-    <Link href={`/song#${song.id}`}>
+    <Link href={`/offline-song#${song.id}`}>
       <Card className="group relative h-full cursor-pointer p-4 transition-all hover:shadow-md">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">
@@ -46,7 +44,6 @@ export const SongCard = ({ song, onDelete }: SongCardProps) => {
               </ViewTransition>
             </div>
           </div>
-          <OfflineReadyButton songId={song.id} />
           <Button
             aria-label="Delete song"
             onClick={handleDelete}

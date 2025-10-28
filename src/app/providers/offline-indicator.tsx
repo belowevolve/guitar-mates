@@ -2,8 +2,8 @@
 
 import { WifiOffIcon } from "lucide-react";
 
-import { Alert, AlertTitle } from "@/shared/components/alert";
 import { useOnline } from "@/shared/hooks/use-online";
+import { Alert, AlertTitle } from "@/shared/ui/alert";
 
 export const OfflineIndicator = () => {
   const isOnline = useOnline();

@@ -18,7 +18,7 @@ const withSerwist = withSerwistInit({
   swDest: "public/sw.js",
   additionalPrecacheEntries: [
     { url: "/", revision },
-    { url: "/song", revision },
+    { url: "/offline-song", revision },
     { url: "/create", revision },
     { url: "/settings", revision },
     { url: "/manifest.json", revision },
@@ -28,6 +28,7 @@ const withSerwist = withSerwistInit({
 const nextConfig: NextConfig = {
   reactCompiler: true,
   cacheComponents: true,
+  typedRoutes: true,
   experimental: {
     viewTransition: true,
   },
