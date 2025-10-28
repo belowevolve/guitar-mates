@@ -19,20 +19,6 @@ export const serwist = new Serwist({
   clientsClaim: true,
   navigationPreload: true,
   runtimeCaching: defaultCache,
-  fallbacks: {
-    entries: [
-      {
-        url: "/offline-song",
-        matcher({ request }) {
-          const url = new URL(request.url);
-          return (
-            request.destination === "document" &&
-            url.pathname.startsWith("/song")
-          );
-        },
-      },
-    ],
-  },
 });
 
 serwist.addEventListeners();

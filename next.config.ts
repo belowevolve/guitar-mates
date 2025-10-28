@@ -18,7 +18,7 @@ const withSerwist = withSerwistInit({
   swDest: "public/sw.js",
   additionalPrecacheEntries: [
     { url: "/", revision },
-    { url: "/offline-song", revision },
+    { url: "/song", revision },
     { url: "/create", revision },
     { url: "/settings", revision },
     { url: "/manifest.json", revision },
